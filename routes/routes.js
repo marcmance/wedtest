@@ -53,6 +53,7 @@ majr.config(['$routeProvider',
                   var addresses = $firebaseArray(ref2);
                   var ref3 = new Firebase("https://marcandjennyromance.firebaseio.com/invitation/");
                   var invites = $firebaseArray(ref3);
+                  console.log(typeof(invites));
                   return {
                     people: people,
                     addresses: addresses,

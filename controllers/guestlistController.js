@@ -63,6 +63,7 @@ majr.controller('GuestListController', ['$scope', '$rootScope', '$route', '$fire
         user.status = answer;
         if(answer == "2") {
             user.rsvpTime = '';
+            user.rsvpTimestamp = '';
             user.rsvpEdit = '';
             user.manualResponse = false;
         }

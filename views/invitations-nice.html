@@ -3,17 +3,16 @@
     {{vars.confirmedCount}}
   </div>
 
-
-  <div class="invite" ng-repeat="i in invitations | orderBy:'rsvpTime'" ng-class="{responded: i.response}">
+  <div class="invite" ng-repeat="i in invitations | orderBy:'rsvpTimestamp'" ng-class="{responded: i.response}">
     <div class="id">
       {{i.invitationID}}
     </div>
     <div class="number">
-      {{i.guests.length}}
+      {{i.guests.length}} || {{i.rsvpTimestamp | date:"MM/dd/yyyy 'at' h:mma"}}
     </div>
     <div class="guests">
       <div class="g" ng-repeat="g in i.guests" class="guest">
-        {{getGuest(g)}} <span ng-show="getRSVPDate(g) != ''"> || {{$index}} {{getRSVPDate(g)}}  || {{getGuestStatus(g, $index)}}</span>
+        {{getGuest(g)}} <span ng-show="getRSVPDate(g) != ''"> || {{getGuestStatus(g, $index)}}</span><br/>
       </div>
     </div>
   </div>

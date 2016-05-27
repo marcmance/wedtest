@@ -4,11 +4,20 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
     $scope.people = inviteInfo.people;
     $scope.addresses = inviteInfo.addresses;
     $scope.addressInfo = [];
+    $scope.testArr = [];
+    $scope.testArr[0] = "hello";
 
     $scope.vars = {
       confirmedCount: 0,
       deniedCount: 0
     }
+
+     $scope.people.$loaded()
+    .then(function(){
+        angular.forEach($scope.people, function(user) {
+            console.log(user);
+        })
+    });
 
     $scope.rsvp = function(answer, i) {
         console.log(i);
@@ -36,7 +45,6 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
     }
     $scope.getRSVPDate = function(i) {
       var user = $scope.people.$getRecord(i);
-
       return user.rsvpTime || '';
     }
     $scope.getAddress = function(i) {
