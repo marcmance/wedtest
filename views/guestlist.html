@@ -1,0 +1,45 @@
+<div class="filter-overlay" ng-show="vars.showFilter" ng-click="closeModal()">
+	{{vars.filters.guest_name}}
+</div>
+
+<div>
+	{{people.length}}
+	{{guestTypeCount.length}}
+</div>
+
+<div class="filter-button-con">
+	<div class="filter-button" ng-click="addFilter('Friend')" ng-class="{selected: vars.filters.guestType == 'Friend'}">
+		Friends
+	</div>
+	<div class="filter-button" ng-click="addFilter('Family')" ng-class="{selected: vars.filters.guestType == 'Family'}">
+		Family
+	</div>
+	<div class="filter-button" ng-click="addFilter('Other')" ng-class="{selected: vars.filters.guestType == 'Other'}">
+		Family Friends
+	</div>
+	<div class="filter-button" ng-click="addFilter('Address')" ng-class="{selected: vars.filters.needsAddress}">
+		Needs Address
+	</div>
+</div>
+
+<div class="guest" ng-repeat="p in people | filter:vars.filters.guest_name | filter: vars.filters.guestType | orderBy:['last_name','first_name']" ng-class="{'no-responses': p.status === 2, 'attending': p.status === 1, 'not-attending': p.status === 0 }" ng-show="vars.filters.needsAddress ? !p.street : true">
+	<div ng-click="showAddress(p.$id)">
+		<span class="guest-name"><a href="#/guest/{{p.$id}}">{{p.last_name}}, {{p.first_name}} <span ng-show="{{p.invitationID != ''}}">(IN)</span></a></span><div class="address" ng-show="vars.showAddress[p.$id]">
+			{{p.street}} <br/>
+			{{p.city}}, {{p.state}} {{p.zip}}
+		</div>
+	</div>
+	<div>
+		<span ng-show="{{p.relation == 'Friend'}}">FD</span>
+		<span ng-show="{{p.relation == 'Family'}}">FAM</span>
+		<span ng-show="{{p.relation == 'Other'}}">FF</span>
+
+		<span ng-show="!p.street">Needs address</span>
+		<button ng-click="rsvp(1, p.$id)">Confirm</button>
+		<button ng-click="rsvp(0, p.$id)">Regret</button>
+		<button ng-click="rsvp(2, p.$id)">Reset</button>
+		<button ng-click="delete(p.$id)">REMOVE</button>
+		<!--<button ng-click="setRelation('Other', p.$id)">Family Friend</button>-->
+	</div>
+</div>
+

@@ -1,0 +1,32 @@
+<div class="add-person-section">
+	<div ng-show="vars.success" class="success">
+		Person successfully saved!
+	</div>
+	<div class='add-person'>
+		<b>First Name</b><br/>
+		<input type="text" ng-model="person.first_name"><br/>
+		<b>Last Name</b><br/>
+		<input type="text" ng-model="person.last_name"><br/>
+		<b>Street</b><br/>
+		<input type="text" ng-model="person.street" ng-keyup="filterStreet()"><br/>
+		<b>City</b><br/>
+		<input type="text" ng-model="person.city"><br/>
+		<b>State</b><br/>
+		<input type="text" ng-model="person.state"><br/>
+		<b>Zip</b><br/>
+		<input type="text" ng-model="person.zip"><br/>
+		<b>Invitation ID</b><br/>
+		<input type="text" ng-model="person.invitationID"><br/>
+
+		<button ng-click="save()">Save</button>
+		<button ng-click="addAddressManual()">Add Address</button>
+	</div>
+
+	<div class="addresses">
+		<div class="address" ng-repeat="a in address | filter:filters" ng-click="fillAddress(a.$id)">
+			{{a.street}}<br/>
+			{{a.city}}, {{a.zip}}
+		</div>
+	</div>
+
+</div>

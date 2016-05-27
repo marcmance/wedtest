@@ -1,0 +1,21 @@
+
+<div class='add-address'>
+	<b>Street</b><br/>
+	<input type="text" ng-model="newAddress.street" ng-keyup="filterStreet()"><br/>
+	<b>City</b><br/>
+	<input type="text" ng-model="newAddress.city"><br/>
+	<b>State</b><br/>
+	<input type="text" ng-model="newAddress.state"><br/>
+	<b>Zip</b><br/>
+	<input type="text" ng-model="newAddress.zip"><br/>
+
+	<button ng-click="save()">Add Address</button>
+
+</div>
+
+<div class="addresses">
+	<div class="guest" ng-repeat="a in address | filter:filters">
+		{{a.street}}<br/>
+		{{a.city}}, {{a.zip}}
+	</div>
+</div>

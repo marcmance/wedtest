@@ -1,0 +1,23 @@
+<section id="invitations">
+  <button ng-click="numberCheck()">up</button>
+  <div class="invite" ng-repeat="i in invitations">
+    {{i.invitationID}}
+    <div ng-repeat="g in i.guests">
+      {{getGuest(g)}} <span ng-show="getGuestStatus(g) == 1"><b>Confirmed!</b></span> <span ng-show="getGuestStatus(g) == 0"><b>denied!</b></span>  <span ng-show="getRSVPDate(g) != '' || "><b>{{getRSVPDate(g)}}</b></span>
+    </div>
+    <div class="address">
+      <!--{{getAddress(i.address)}}
+      {{addressInfo[i.address].street}}-->
+    </div>
+
+    <div class="ID">
+      <input ng-model="i.invitationID"/>
+    </div>
+
+    <div>
+      <button ng-click="updateInvitation(i.$id)">UPDATE</button>
+      <button ng-click="deleteInvitation(i.$id)">REMOVE</button>
+      <button ng-click="repsonded(i.$id)">response = {{i.response}}</button>
+    </div>
+  </div>
+</section>

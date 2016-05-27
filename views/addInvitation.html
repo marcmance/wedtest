@@ -1,0 +1,49 @@
+<section id="addInvitation">
+	<div class="filter-overlay" ng-show="vars.showFilter" ng-click="closeModal()">
+		{{vars.filters.guest_name}}
+	</div>
+
+	<div class="filter-overlay" ng-show="vars.showAddressFilter" ng-click="closeModal()">
+		{{vars.filters.address}}
+	</div>
+
+	<h1>Create an invitation</h1>
+
+	<div ng-show="vars.showBeginType">Begin typing for names</div>
+
+	<div class="guest-invites" ng-repeat="p in people | filter:vars.filters.guest_name | orderBy:['last_name','first_name']" ng-show="vars.showNames" ng-click="addPerson(p.$id)" ng-class="{selected: vars.addedNames[p.$id], invitation: p.invitationID}">
+		{{p.last_name}}, {{p.first_name}}
+	</div>
+
+	<div class="added-guests-con">
+		<h1>Selected names:</h1>
+		<div class="added-guests" ng-repeat="(p,v) in vars.addedNames">
+			{{v.last_name}}, {{v.first_name}} <span ng-click="addPerson(v.$id)">[Delete]</span>
+		</div>
+
+		<div class="submitPeople">
+			<button ng-click="submitPeople()" ng-show="vars.showSubmitPeople">Submit People</button>
+		</div>
+
+		<div class="selected-address">
+			<h1>Selected Address:</h1>
+			{{vars.selectedAddress.street}}
+		</div>
+
+		<div ng-show="vars.showBeginTypeAddresses">Begin typing for addresses</div>
+
+
+		<div class="address" ng-repeat="a in address | filter:vars.filters.address" ng-show="vars.showAddress" ng-click="addAddress(a.$id)">
+				{{a.street}}<br/>
+				{{a.city}}, {{a.zip}}
+		</div>
+
+		<div class="submitInvitation">
+			<button ng-click="submitInvitation()" ng-show="vars.showSubmitAddress">Submit Invitation</button>
+		</div>
+	</div>
+
+	<div class="success" ng-show="vars.showSuccessMessage">
+		Successful invitation!
+	</div>
+</section>

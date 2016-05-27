@@ -1,0 +1,20 @@
+<section id="invitations-nice">
+  <div>
+    {{vars.confirmedCount}}
+  </div>
+
+
+  <div class="invite" ng-repeat="i in invitations | orderBy:'rsvpTime'" ng-class="{responded: i.response}">
+    <div class="id">
+      {{i.invitationID}}
+    </div>
+    <div class="number">
+      {{i.guests.length}}
+    </div>
+    <div class="guests">
+      <div class="g" ng-repeat="g in i.guests" class="guest">
+        {{getGuest(g)}} <span ng-show="getRSVPDate(g) != ''"> || {{$index}} {{getRSVPDate(g)}}  || {{getGuestStatus(g, $index)}}</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<div>
+	<div class="address" ng-repeat="a in address | filter:filters" ng-click="fillAddress(a.$id)">
+		{{a.street}}<br/>
+		{{a.city}}, {{a.zip}}
+
+		<br/>
+		<button ng-click="delete(a.$id)">REMOVE</button>
+	</div>
+</div>

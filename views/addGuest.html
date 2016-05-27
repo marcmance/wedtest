@@ -1,0 +1,39 @@
+<div class="add-person-section">
+	<div class='add-person'>
+		<b>First Name</b><br/>
+		<input type="text" ng-model="guestlist.newName.first_name"><br/>
+		<b>Last Name</b><br/>
+		<input type="text" ng-model="guestlist.newName.last_name"  ng-keyup="$event.keyCode == 13 ? enter() : null"><br/>
+		<b>Street</b><br/>
+		<input type="text" ng-model="guestlist.newName.street" ng-keyup="filterStreet()"><br/>
+		<b>City</b><br/>
+		<input type="text" ng-model="guestlist.newName.city"><br/>
+		<b>State</b><br/>
+		<input type="text" ng-model="guestlist.newName.state"><br/>
+		<b>Zip</b><br/>
+		<input type="text" ng-model="guestlist.newName.zip"><br/>
+
+		<label>
+			Family
+			<input type="radio" ng-model="guestlist.newName.relation" value="Family">
+  		</label>
+  		<label>
+			Friend
+			<input type="radio" ng-model="guestlist.newName.relation" value="Friend">
+  		</label>
+  		<label>
+			Family Friend
+			<input type="radio" ng-model="guestlist.newName.relation" value="Other">
+  		</label>
+
+		<button ng-click="addName()">Add Name</button>
+
+	</div>
+
+	<div class="addresses">
+		<div class="address" ng-repeat="a in address | filter:filters" ng-click="fillAddress(a.$id)">
+			{{a.street}}<br/>
+			{{a.city}}, {{a.zip}}
+		</div>
+	</div>
+</div>

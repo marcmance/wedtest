@@ -1,0 +1,45 @@
+#invitations {
+  .invite {
+    border: 1px solid red;
+    margin: 10px 0;
+    padding: 5px;
+  }
+}
+
+#invitations-nice {
+  .invite {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    &.responded {
+      background-color: @success;
+    }
+
+    .id {
+      float: left;
+    }
+    .number {
+      float: left;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 20px;
+    }
+    .guests {
+      float: left;
+      margin-left: 20px;
+
+      .guest {
+        &.attending {
+
+        }
+      }
+    }
+
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+  }
+}
