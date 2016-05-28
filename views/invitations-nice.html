@@ -1,19 +1,36 @@
 <section id="invitations-nice">
-  <div>
-    {{vars.confirmedCount}}
+  <div class="counts">
+    <div class="count-con confirmed">
+      {{vars.confirmedCount}}
+    </div>
+
+    <div class="count-con denied">
+      {{vars.deniedCount}}
+    </div>
+
+    <div class="count-con noreply">
+      {{vars.noreplyCount}}
+    </div>
   </div>
 
-  <div class="invite" ng-repeat="i in invitations | orderBy:'rsvpTimestamp'" ng-class="{responded: i.response}">
-    <div class="id">
-      {{i.invitationID}}
-    </div>
-    <div class="number">
-      {{i.guests.length}} || {{i.rsvpTimestamp | date:"MM/dd/yyyy 'at' h:mma"}}
-    </div>
+  <div class="invite" ng-repeat="i in invitations | orderBy:'[-response, rsvpTimestamp]'" ng-class="{responded: i.response}">
     <div class="guests">
       <div class="g" ng-repeat="g in i.guests" class="guest">
-        {{getGuest(g)}} <span ng-show="getRSVPDate(g) != ''"> || {{getGuestStatus(g, $index)}}</span><br/>
+        <span class="guest-confirmed" ng-show="getGuestStatus(g) == 'Confirmed'"> O </span>
+        <span class="guest-denied" ng-show="getGuestStatus(g) == 'Denied'"> x </span>
+        {{getGuest(g)}} <!--<span ng-show="getRSVPDate(g) != ''"> || {{getGuestStatus(g, $index)}}</span>-->
       </div>
+      <div class="guest-length">
+        <span ng-show="i.response">{{i.confirmedCount}} of</span> {{i.guests.length}}
+      </div>
+    </div>
+
+    <div class="number">
+      {{i.rsvpTimestamp | date:"MM/dd/yyyy 'at' h:mma"}}
+    </div>
+
+    <div class="id">
+      {{i.invitationID}}
     </div>
   </div>
 </section>

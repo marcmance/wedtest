@@ -7,32 +7,84 @@
 }
 
 #invitations-nice {
+
+  .counts {
+    height: 100px;
+    .count-con {
+      float: left;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      font-size: 20px;
+      vertical-align: middle;
+      line-height: 100px;
+      font-weight: bold;
+
+      &.confirmed {
+        color: @success-border;
+      }
+      &.denied {
+        color: @error-border;
+      }
+      &.noreply {
+
+      }
+    }
+  }
   .invite {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
     padding: 10px;
 
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+
     &.responded {
       background-color: @success;
     }
 
-    .id {
-      float: left;
-    }
-    .number {
-      float: left;
-      font-size: 20px;
-      font-weight: bold;
-      margin-left: 20px;
-    }
     .guests {
       float: left;
       margin-left: 20px;
+      width: 200px;
 
-      .guest {
-        &.attending {
+      .guest-length {
+        font-weight: bold;
+      }
 
-        }
+      .guest-confirmed {
+        color: @success-border;
+      }
+      .guest-denied {
+        color: @error-border;
+      }
+      @media (max-width: 600px) {
+        width: 100%;
+        float: none;
+        margin-bottom: 10px;
+      }
+    }
+
+    .id {
+      float: left;
+      margin-left: 20px;
+      @media (max-width: 600px) {
+        width: 100%;
+        float: none;
+        margin-bottom: 10px;
+      }
+    }
+    .number {
+      float: left;
+      font-size: 16px;
+      font-weight: bold;
+      margin-left: 20px;
+      width: 200px;
+      @media (max-width: 600px) {
+        width: 100%;
+        float: none;
+        margin-bottom: 10px;
       }
     }
 

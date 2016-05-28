@@ -24,7 +24,7 @@
 
 <div class="guest" ng-repeat="p in people | filter:vars.filters.guest_name | filter: vars.filters.guestType | orderBy:['last_name','first_name']" ng-class="{'no-responses': p.status === 2, 'attending': p.status === 1, 'not-attending': p.status === 0 }" ng-show="vars.filters.needsAddress ? !p.street : true">
 	<div ng-click="showAddress(p.$id)">
-		<span class="guest-name"><a href="#/guest/{{p.$id}}">{{p.last_name}}, {{p.first_name}} <span ng-show="{{p.invitationID != ''}}">(IN)</span></a></span><div class="address" ng-show="vars.showAddress[p.$id]">
+		<span class="guest-name"><a href="#/guest/{{p.$id}}">{{p.last_name}}, {{p.first_name}} <span ng-show="p.invitationID != ''">({{p.invitationID}})</span></a></span><div class="address" ng-show="vars.showAddress[p.$id]">
 			{{p.street}} <br/>
 			{{p.city}}, {{p.state}} {{p.zip}}
 		</div>

@@ -9,13 +9,21 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
 
     $scope.vars = {
       confirmedCount: 0,
-      deniedCount: 0
+      deniedCount: 0,
+      noreplyCount: 0
     }
 
-     $scope.people.$loaded()
-    .then(function(){
-        angular.forEach($scope.people, function(user) {
-            console.log(user);
+     $scope.people.$loaded().then(function(){
+        angular.forEach($scope.people, function(guest) {
+            if(guest.status == 1) {
+              $scope.vars.confirmedCount++;
+            }
+            else if(guest.status == 0) {
+              $scope.vars.deniedCount++;
+            }
+            else if(guest.status == 2) {
+              $scope.vars.noreplyCount++;
+            }
         })
     });
 
@@ -38,7 +46,6 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
         return "Confirmed";
       }
       else if (user.status == 0) {
-        //$scope.vars.deniedCount++;
         return "Denied";
       }
 
@@ -116,25 +123,10 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
       $scope.invitations.$save(invite);
     }
 
-
-
     $scope.updateInvitation = function(i) {
       var invite = $scope.invitations.$getRecord(i);
       invite.invitationID = parseInt(invite.invitationID) || invite.invitationID;
       $scope.invitations.$save(invite);
-      //var copyMade = invite.copyMade;
-      /*if(!copyMade) {
-        invite.createNew = true;
-      }
-      $scope.invitations.$save(invite);
-      if(!copyMade) {
-        var newRef = new Firebase("https://marcandjennyromance.firebaseio.com/invitation/adam-kristina-2");
-        var testInvite = $firebaseObject(newRef);
-        testInvite.address = invite.address;
-        testInvite.guests = invite.guests;
-        testInvite.copyMade = true;
-        testInvite.$save();
-      }*/
     }
 
 }]);
