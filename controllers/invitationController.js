@@ -9,14 +9,25 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
 
     $scope.vars = {
       confirmedCount: 0,
+      confirmedBabies: 0,
+      confirmedKids: 0,
       deniedCount: 0,
-      noreplyCount: 0
+      noreplyCount: 0,
+      cardCount: 0
     }
 
      $scope.people.$loaded().then(function(){
         angular.forEach($scope.people, function(guest) {
             if(guest.status == 1) {
-              $scope.vars.confirmedCount++;
+              if(guest.baby) {
+                $scope.vars.confirmedBabies++;
+              }
+              else if(guest.kids) {
+                $scope.vars.confirmedKids++;
+              }
+              else {
+                $scope.vars.confirmedCount++;
+              }
             }
             else if(guest.status == 0) {
               $scope.vars.deniedCount++;
@@ -24,7 +35,25 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
             else if(guest.status == 2) {
               $scope.vars.noreplyCount++;
             }
-        })
+            if(guest.manualResponse) {
+              $scope.vars.cardCount++;
+            }
+        });
+
+        var graph = $(".graphs .totals");
+        var graphWidth = graph.width();
+        var percent = ($scope.vars.confirmedCount / 235) * graphWidth;
+        graph.find(".confirmed").css("width", percent);
+        var percent = ($scope.vars.deniedCount / 235) * graphWidth;
+
+        var denied = graph.find(".denied").css("width", percent);
+        if(percent == 0) {
+          denied.hide();
+        }
+
+        var percent = ($scope.vars.noreplyCount / 235) * graphWidth;
+        graph.find(".noreply").css("width", percent);
+
     });
 
     $scope.rsvp = function(answer, i) {
@@ -123,9 +152,34 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
       $scope.invitations.$save(invite);
     }
 
+    $scope.getCurrentDate = function () {
+      var d = new Date(Date.now());
+      var humanDate =  (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+      return humanDate;
+    };
+
     $scope.updateInvitation = function(i) {
       var invite = $scope.invitations.$getRecord(i);
       invite.invitationID = parseInt(invite.invitationID) || invite.invitationID;
+      $scope.invitations.$save(invite);
+    }
+
+    $scope.confirmInvitation = function(i) {
+      var invite = $scope.invitations.$getRecord(i);
+      var i =0;
+      for(g in invite.guests) {
+        var guest = $scope.people.$getRecord(invite.guests[g]);
+        guest.status = 1;
+        guest.rsvpTime = $scope.getCurrentDate();
+        guest.rsvpTimestamp = Date.now();
+        guest.manualResponse = true;
+        $scope.people.$save(guest);
+      }
+      invite.response = true;
+      invite.rsvpTime = $scope.getCurrentDate();
+      invite.rsvpTimestamp = Date.now();
+      invite.confirmedCount = invite.guests.length;
+      invite.manualResponse = true;
       $scope.invitations.$save(invite);
     }
 

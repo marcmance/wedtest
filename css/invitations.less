@@ -22,12 +22,38 @@
 
       &.confirmed {
         color: @success-border;
+        width: 200px;
       }
       &.denied {
         color: @error-border;
       }
       &.noreply {
 
+      }
+    }
+  }
+  .graphs {
+    margin: 20px 0;
+
+    .totals {
+      width: 400px;
+      height: 30px;
+      border: 1px solid black;
+      .confirmed {
+        background-color: @success;
+      }
+      .noreply {
+        background-color: #000000;
+        color: #FFFFFF;
+      }
+      div {
+        float: left;
+        height: 100%;
+      }
+      &:after {
+        display: block;
+        content: "";
+        clear: both;
       }
     }
   }

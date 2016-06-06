@@ -1,7 +1,7 @@
 <section id="invitations-nice">
   <div class="counts">
     <div class="count-con confirmed">
-      {{vars.confirmedCount}}
+      {{vars.confirmedCount}} / {{vars.confirmedBabies}} (B)
     </div>
 
     <div class="count-con denied">
@@ -13,6 +13,20 @@
     </div>
   </div>
 
+  <div class="graphs">
+    <div class="totals">
+      <div class="confirmed">
+        {{vars.confirmedCount}}
+      </div>
+      <div class="denied">
+        {{vars.deniedCount}}
+      </div>
+      <div class="noreply">
+        {{vars.noreplyCount}}
+      </div>
+    </div>
+  </div>
+
   <div class="invite" ng-repeat="i in invitations | orderBy:'[-response, rsvpTimestamp]'" ng-class="{responded: i.response}">
     <div class="guests">
       <div class="g" ng-repeat="g in i.guests" class="guest">
@@ -21,7 +35,7 @@
         {{getGuest(g)}} <!--<span ng-show="getRSVPDate(g) != ''"> || {{getGuestStatus(g, $index)}}</span>-->
       </div>
       <div class="guest-length">
-        <span ng-show="i.response">{{i.confirmedCount}} of</span> {{i.guests.length}}
+        <span ng-show="i.response">{{i.confirmedCount}} of</span> {{i.guests.length}} <span ng-show='i.manualResponse'>(card)</a>
       </div>
     </div>
 
