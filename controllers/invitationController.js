@@ -22,7 +22,7 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
               if(guest.baby) {
                 $scope.vars.confirmedBabies++;
               }
-              else if(guest.kids) {
+              else if(guest.kid) {
                 $scope.vars.confirmedKids++;
               }
               else {
