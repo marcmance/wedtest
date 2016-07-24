@@ -65,6 +65,22 @@ majr.config(['$routeProvider',
             templateUrl: 'views/addresses.html',
             controller: 'AddressController'
         })
+        .when('/seating', {
+            templateUrl: 'views/seating.html',
+            controller: 'SeatingController',
+            resolve: {
+                inviteInfo: function($firebaseArray){
+                  var ref = new Firebase("https://marcandjennyromance.firebaseio.com/person");
+                  var people = $firebaseArray(ref);
+                  var ref2 = new Firebase("https://marcandjennyromance.firebaseio.com/table");
+                  var table = $firebaseArray(ref2);
+                  return {
+                    people: people,
+                    table: table
+                  };
+                }
+            }
+        })
         .otherwise({ redirectTo: '/' });
     }
 ]);

@@ -1,0 +1,49 @@
+<section id="seating">
+  <!-- <div  ui-sortable="sortableOptions" class="lists" ng-model="items">
+    <div ng-repeat="item in items">{{ item }}</div>
+  </div>
+  <div  ui-sortable="sortableOptions" class="lists" ng-model="items2">
+    <div ng-repeat="item in items2">{{ item }}</div>
+  </div> -->
+
+  <div class="filter-con">
+    <input class="giant" ng-model="vars.filters.guest_name">
+  </div>
+
+  <div>
+    {{vars.tabled}}
+  <div>
+
+  <div class="guest-invites" ng-show="vars.filters.guest_name != ''" ng-repeat="p in people | filter:vars.filters.guest_name | orderBy:['last_name','first_name']">
+    <div ng-show="p.status == 1">
+      <div class="name"><b>{{p.last_name}}, {{p.first_name}}</b></div>
+      <div class="numbers-con">
+        <div ng-repeat="n in numberstuff" ng-click="toTable($index, p)" class="to-table" ng-class="{selected: p.table - 1 == $index}">{{$index + 1}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="all-tables">
+    <div class="table-con" ng-repeat="t in tables">
+      <div class="name"><b>{{t.tableName}}  ({{t.tableNumber}})</div>
+      <div class="total">{{t.guests.length}}</div>
+      <div ui-sortable="sortableOptions" class="tables" ng-model="t.guests">
+        <div ng-repeat="g in t.guests" class="guest">
+          <div class="guest-name">
+            {{g.first_name}} {{g.last_name}}
+          </div>
+          <div class="guest-remove" ng-click="removeGuest(t.$id, g)">
+            X
+          </div>
+        </div>
+      </div>
+      <!-- <div class="delete">
+        <div ng-click="deleteTable(t.$id)">Delete table</div>
+      </div> -->
+    </div>
+  </div>
+  <!-- <div class="add-table" ng-click="addTable()">
+    +
+  </div> -->
+
+</section>

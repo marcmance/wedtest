@@ -32,7 +32,7 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
             else if(guest.status == 0) {
               $scope.vars.deniedCount++;
             }
-            else if(guest.status == 2) {
+            else if(guest.status == 2 && guest.last_name != 'Bisda') {
               $scope.vars.noreplyCount++;
             }
             if(guest.manualResponse) {

@@ -1,4 +1,4 @@
-var majr = angular.module('majr', ['ngResource', 'ngRoute', 'ngSanitize', 'firebase'])
+var majr = angular.module('majr', ['ngResource', 'ngRoute', 'ngSanitize', 'firebase', 'ui.sortable'])
 .run(['$rootScope',
 
     function ($rootScope) {

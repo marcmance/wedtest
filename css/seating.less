@@ -1,0 +1,107 @@
+#seating {
+  ul {
+    list-style-type: none;
+  }
+
+  .filter-con {
+    margin: 40px 0;
+
+    input {
+      width: 50%;
+      height: 50px;
+      font-size: 20px;
+      border: 1px solid black;
+    }
+  }
+
+  .all-tables {
+    &:after {
+      clear: both;
+      display: block;
+      content: "";
+    }
+  }
+
+  .table-con {
+    border: 1px dotted #FC5C53;
+    width: 300px;
+    min-height: 600px;
+    height: auto;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+
+    .name {
+      text-align: center;
+    }
+
+    .total {
+      text-align: center;
+    }
+
+    .guest {
+      border: 1px solid black;
+      width: 80%;
+      margin: 5px auto;
+      padding: 10px;
+      background-color: #B3D3E8;
+
+      > div:first-child {
+        width: 80%
+      }
+
+      .guest-name {
+        float: left;
+        font-size: 18px;
+      }
+      .guest-remove {
+        float: right;
+      }
+      &:after {
+        clear: both;
+        display: block;
+        content: "";
+      }
+    }
+  }
+
+  .to-table {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+
+    &.selected {
+      border: 1px solid red;
+    }
+  }
+
+  .guest-invites {
+    height: 200px;
+    width: 500px;
+
+    &:after {
+      clear: both;
+      display: block;
+      content: "";
+    }
+  }
+
+  .nubers-con {
+    &:after {
+      clear: both;
+    }
+  }
+
+  .add-table {
+    border: 1px solid red;
+    width: 300px;
+    height: 100px;
+    margin-right: 10px;
+    margin-top: 10px;
+    float: left;
+  }
+}
