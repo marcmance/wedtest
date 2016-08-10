@@ -12,7 +12,8 @@ majr.controller('GuestListController', ['$scope', '$rootScope', '$route', '$fire
         filters: {
             guest_name: '',
             guestType: '',
-            needsAddress: false
+            needsAddress: false,
+            needsTable: false
         },
 
         showAddress: [],
@@ -93,6 +94,9 @@ majr.controller('GuestListController', ['$scope', '$rootScope', '$route', '$fire
         if(f === "Address") {
             console.log($scope.vars.filters.needsAddress);
             $scope.vars.filters.needsAddress = !$scope.vars.filters.needsAddress;
+        }
+        else if (f === 'Table') {
+            $scope.vars.filters.needsTable = !$scope.vars.filters.needsTable;
         }
         else {
             if(f === $scope.vars.filters.guestType) {

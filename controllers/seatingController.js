@@ -5,7 +5,7 @@ majr.controller('SeatingController', ['$scope', '$route', '$firebaseObject', '$f
 
   $scope.sortableOptions = {
     placeholder: "app",
-    connectWith: ".tables"
+    connectWith: ".tables",
   };
 
   $scope.people = inviteInfo.people;
@@ -23,12 +23,14 @@ majr.controller('SeatingController', ['$scope', '$route', '$firebaseObject', '$f
 
   $scope.people.$loaded().then(function(){
     angular.forEach($scope.people, function(guest) {
+      if(guest.status == 1) {
         if(guest.table != undefined && guest.table > 0) {
           $scope.vars.tabled++;
         }
         else {
           $scope.vars.notTabled++;
         }
+      }
     });
   });
 
@@ -100,7 +102,7 @@ majr.controller('SeatingController', ['$scope', '$route', '$firebaseObject', '$f
       }
     }
     var p = $scope.people.$getRecord(p.gid);
-    p.table = "";
+    p.table = 0;
     $scope.people.$save(p);
     $scope.tables.$save(t);
   }

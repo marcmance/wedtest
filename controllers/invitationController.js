@@ -24,6 +24,7 @@ majr.controller('InvitationController', ['$scope', '$route', '$firebaseObject', 
               }
               else if(guest.kid) {
                 $scope.vars.confirmedKids++;
+                console.log(guest);
               }
               else {
                 $scope.vars.confirmedCount++;

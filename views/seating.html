@@ -11,7 +11,8 @@
   </div>
 
   <div>
-    {{vars.tabled}}
+    {{vars.tabled}} seated <br/>
+    {{vars.notTabled}} needs a table <br/>
   <div>
 
   <div class="guest-invites" ng-show="vars.filters.guest_name != ''" ng-repeat="p in people | filter:vars.filters.guest_name | orderBy:['last_name','first_name']">

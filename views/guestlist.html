@@ -17,14 +17,18 @@
 	<div class="filter-button" ng-click="addFilter('Other')" ng-class="{selected: vars.filters.guestType == 'Other'}">
 		Family Friends
 	</div>
+	<!--
 	<div class="filter-button" ng-click="addFilter('Address')" ng-class="{selected: vars.filters.needsAddress}">
 		Needs Address
+	</div>-->
+	<div class="filter-button" ng-click="addFilter('Table')" ng-class="{selected: vars.filters.needsTable}">
+		Needs Table
 	</div>
 </div>
 
-<div class="guest" ng-repeat="p in people | filter:vars.filters.guest_name | filter: vars.filters.guestType | orderBy:['last_name','first_name']" ng-class="{'no-responses': p.status === 2, 'attending': p.status === 1, 'not-attending': p.status === 0 }" ng-show="vars.filters.needsAddress ? !p.street : true">
+<div class="guest" ng-repeat="p in people | filter:vars.filters.guest_name | filter: vars.filters.guestType | orderBy:['last_name','first_name']" ng-class="{'no-responses': p.status === 2, 'attending': p.status === 1, 'not-attending': p.status === 0 }" ng-show="vars.filters.needsTable ? !p.table : true">
 	<div ng-click="showAddress(p.$id)">
-		<span class="guest-name"><a href="#/guest/{{p.$id}}">{{p.last_name}}, {{p.first_name}} <span ng-show="p.kid">({{p.invitationID}})</span></a></span><div class="address" ng-show="vars.showAddress[p.$id]">
+		<span class="guest-name"><a href="#/guest/{{p.$id}}">{{p.last_name}}, {{p.first_name}} <span ng-show="p.table"> || {{p.table}} </span> <span ng-show="p.kid"> ({{p.invitationID}})</span></a></span><div class="address" ng-show="vars.showAddress[p.$id]">
 			{{p.street}} <br/>
 			{{p.city}}, {{p.state}} {{p.zip}}
 		</div>
