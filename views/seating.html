@@ -26,8 +26,8 @@
 
   <div class="all-tables">
     <div class="table-con" ng-repeat="t in tables">
-      <div class="name"><b>{{t.tableName}}  ({{t.tableNumber}})</div>
-      <div class="total">{{t.guests.length}}</div>
+      <div class="name"><b>{{t.tableNumber}}</div>
+      <div class="total">{{t.guests.length}} guests</div>
       <div ui-sortable="sortableOptions" class="tables" ng-model="t.guests">
         <div ng-repeat="g in t.guests" class="guest">
           <div class="guest-name">
